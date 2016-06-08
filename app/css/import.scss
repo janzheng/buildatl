@@ -2,6 +2,18 @@
 ---
 
 
+.container {
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Roboto", "sans-serif";
+  max-width: 600px;
+}
+
+p {
+  font-family: "courier"
+}
+
+/*
 // core frameworks 
 @import 'bourbon/bourbon';
 @import "neat/neat-helpers"; // or "neat-helpers" when in Rails
@@ -117,4 +129,6 @@ body, html {
 @import "invoice";                  // for invoices
 @import 'other';                    // for experiments / playing around
 
+
+*/
 
