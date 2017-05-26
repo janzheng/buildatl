@@ -1,169 +1,49 @@
 ---
-layout: layout-site
-title: Jan Zheng - UX &amp; Code
-menu: full
+title: buildATL
 ---
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>buildATL – build up.</title>
+  <meta name="description" content="buildATL aims to connect the doers and the builders of ATL">
+  <meta name="keywords" content="atlanta, startup, freelance, work, ux, code, design">
+  <meta name="author" content="Jan Zheng">
+  <meta name="copyright" content="Jan Zheng">
   
-<!-- 
+  <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,600, 700, 900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/app/css/import.css">
 
-  HOME PAGE LIST
+</head>
 
--->
-
-
-
-<!-- post format:
-
-layout: post
-title: Break the Grid!
-summary: but do it responsively
-
-source: /app/posts/break-the-grid/
-preview-img : /app/posts/nanowrito/preview.png
-preview-css : post-preview-dark post--review-break-the-grid
-
-external: #
-youtube: #
-vimeo: #
-
-// categories: project, rant, tool, portfolio 
-category : rant
-tags : [design, another tag]
-
-published : true
-portfolio : false
-comments : true
-featured : false
-
--->
-
+<body>  
 
 <div class="container">
-  <div class="page postList__container" id="blogList">
 
-    <!-- <input class="search" placeholder="search"/> -->
-    <!-- <span class="sort" data-sort="sortCategory">Sort by Category</span> -->
-    <!-- <span class="sort" data-sort="sortDate">Sort by Date</span> -->
-
-    <div class="page__header">
-      <div class="page__title">
-        Thoughts &amp; Words
-      </div>
-
-      <div class="postList__filter">
-        <div class="filter-btn filter-btn--large" class="btn-inline" data-filter="lab"><span class="icon icon--filter icon--lab"></span><span class="filter-btn--title">lab</span></div>
-        <div class="filter-btn filter-btn--large" class="btn-inline" data-filter="rant"><span class="icon icon--filter icon--rant"></span><span class="filter-btn--title">rants</span></div>
-        <div class="filter-btn filter-btn--large" class="btn-inline" data-filter="idea"><span class="icon icon--filter icon--idea"></span><span class="filter-btn--title">ideas</span></div>
-        <div class="filter-btn filter-btn--large" class="btn-inline" data-filter="tumblr"><span class="icon icon--filter icon--tumblr"></span><span class="filter-btn--title">tumblr</span></div>
-        <!-- <div class="filter-btn" class="btn-inline" data-filter="work"><span class="icon icon--filter icon--work"></div> -->
-      </div>
-    </span>
-      
-    <!-- .list is necessary for the list.js sorter -->
-    <ul class="list">
-
-
-      <notextile class="tumblr">
-      </notextile>
-
-    {% for post in site.posts %}
-    {% if post.published == true and post.category != 'work' %} 
-
-      <li class="post {% if post.featured %} post--featured {% endif %}" data-date="{{ post.date }}">
-
-        <a href="{% if post.external %} {{ post.external }} {% else %} {{ post.url }} {% endif %} ">
-          <div class="post__container {{ post.preview-css }} {% if post.preview-img == nil %} post__imgPreview--noImg {% else %} post__imgPreview" data-bg="{{ post.preview-img }} {% endif %}"> <!-- bg image is set in script.js -->
-
-            <div class="post__info">
-
-              <!-- this is for category tags labels -->
-              {% if post.category %}
-              <div class="post__category post__category--{{post.category}}">
-                <div class="post__category__icon">
-
-                  {% if post.category == 'lab' %}
-                    <span class="icon icon--filter icon--lab"></span>
-                  {% endif %}
-
-                  {% if post.category == 'idea' %}
-                    <span class="icon icon--filter icon--idea"></span>
-                  {% endif %}
-
-                  {% if post.category == 'rant' %}
-                    <span class="icon icon--filter icon--rant"></span>
-                  {% endif %}
-
-                  {% if post.category == 'work' %}
-                    <span class="icon icon--filter icon--work"></span>
-                  {% endif %}
-
-                </div>
-                <!-- needs to be on one line for sort.js -->
-                <div class="post__category__label sortCategory">{{post.category}}</div>
-              </div>
-              {% endif %}
-
-              <div class="post__date__container">
-                <div class="post__date">{{ post.date | date: "%d %B %Y" }}</div>
-              </div>
-
-              <div class="post__title__container">
-                <div class="post__title">{{ post.title }}</div>
-              </div>
-
-              {% if post.youtube %}<iframe width="550" height="452" src="{{ post.youtube }}" frameborder="0" allowfullscreen></iframe>{% endif %}
-              {% if post.vimeo %}<iframe src="{{ post.vimeo }}?title=0&amp;byline=0&amp;portrait=0&amp;color=0f314a" width="550" height="309" frameborder="0"></iframe>{% endif %}    
-
-              {% if post.summary %}
-              <div class="post__summary__container">
-                <div class="post__summary">{{ post.summary }}</div>
-              </div>
-              {% endif %}
-
-              {% if post.tags != null %}
-                {% assign tags_list = post.tags %} 
-                  {% if tags_list.size > 0 %}
-                    <div class="post__tags__container">
-                      <ul class="post__tags">
-
-                        {% if tags_list.first[0] == null %}
-                          {% for tag in tags_list %} 
-                            <li>{{ tag }}</li>
-                          {% endfor %}
-                        {% else %}
-                          {% for tag in tags_list %} 
-                            <li>{{ tag[0] }}</li>
-                          {% endfor %}
-                        {% endif %}
-                      </ul>
-                    </div>
-                  {% endif %}
-                  {% assign tags_list = nil %}
-              {% endif %}
-
-              <div class="clear"></div>
-            </div>
-            <!-- end post__info -->
-
-          </div>
-          <!-- end post__container -->
-
-        </a>
-        <!-- end post link -->
-
-      </li>
-      <!-- end post -->
-    {% endif %}
-    {% endfor %}
-
-    </ul>
-
+  <div class="main">
+    <p>this is</p>
+    <h1>buildATL</h1>
   </div>
-  <!-- end posts list -->
+
+  <div class="secondary">
+    <p><b>buildATL</b> aims to connect the front and backend developers, UX and visual designers, and writers with the startups, businesses, and nonprofits of Atlanta.</p>
+  </div>
+
+
+  <div class="contact">
+    <p>send your resume or questions to <a href="mailto:hello@buildatl.com">hello@buildatl.com</a></p>
+    <p>stay tuned Atlanta</p>
+    <p>there's much much more to come.</p>
+  </div>
 
 </div>
-<!-- end outer-container -->
 
+</body>
+</html>
 
 
 
