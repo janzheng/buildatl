@@ -1,0 +1,12 @@
+{
+  "name": "ffg",
+  "version": "1.0.0",
+  "description": "ffg",
+  "author": "Jan",
+  "private": true,
+  "scripts": {
+    "commit": "git add . -A ; git commit ; git push origin master ",
+  },
+  "dependencies": {
+  }
+}
