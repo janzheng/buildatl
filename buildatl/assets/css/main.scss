@@ -1,6 +1,97 @@
 
 
 
+
+
+@import 'settings.scss';
+
+$font-size-base: 18px;
+$font-lineheight: 28px;
+
+
 body {
-  // background: green !important
+
 }
+
+
+.logo-link {
+  &:after {
+    content: none !important;
+  }
+}
+
+
+
+%links-bg,
+._links-bg {
+  &:after {
+    content: ' ';
+    position: absolute;
+    left: $offset; top: $offset*2;
+    height: $offset/2;
+    background: $color-main;
+    padding: $offset;
+
+    width: 100%;
+    z-index: -1;
+
+    // clip-path: polygon(0% 20%, 80% 0%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+
+
+.title {
+  padding-bottom: $size-base;
+}
+h3 {
+  font-size: $size-p2;
+  line-height: $size-p4;
+  // padding-top:0;
+  // padding-bottom: 0;
+}
+
+
+// links
+a {
+  border: 0;
+  position: relative;
+  // color: $color-green;
+  // @extend ._pointer-no_events;
+  // @extend %ease-fast;
+}
+section.body {
+  a {
+    text-decoration: underline;
+  }
+}
+
+p {
+  font-size: $font-size-base;
+  line-height: $font-lineheight;
+
+  padding-left: 0;
+  @extend %font-serif;
+  @extend ._width-content-magic;
+
+  a {
+    font-weight: 700;
+    &+a {
+      padding-left: 4px;
+    }
+  }
+}
+
+
+
+@import 'components';
+@import 'sections';
+
+
+
+
+
+
+
+
+

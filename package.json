@@ -5,7 +5,7 @@
   "author": "Jan",
   "private": true,
   "scripts": {
-    "commit": "git add . -A ; git commit ; git push origin master ",
+    "commit": "git add . -A ; git commit ; git push origin master "
   },
   "dependencies": {
   }

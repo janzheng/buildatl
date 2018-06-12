@@ -1,0 +1,68 @@
+
+.Header {
+  a {
+    font-size: $size-larger;
+  }
+  .nuxt-link-exact-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+  .Header-orgs.nuxt-link-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+}
+
+.Footer {
+  a {
+    border: 0;
+    // font-weight: 900;
+    // color: $color-body;
+
+    &:hover {
+      // @extend %ease;
+      // color: $color-hover;
+      // padding-left: $offset*3;
+      // &:after {
+
+      //   left: $offset *3;
+      // }
+    }
+  }
+}
+
+
+.About {
+  .About-title {
+    @extend h3;
+    font-weight: 300;
+    .buildatl {
+      .build {
+        // font-style: italic;
+        @extend %font-display;
+        padding-right: $size-base/4;
+      }
+      .logo-sm {
+        padding-right: $size-half;
+      }
+    }
+    .awesome {
+      font-weight: 700;
+    }
+  }
+
+}
+
+
+
+.OrgPage {
+  .OrgPage-sidebar {
+    &, *, p {
+      @extend %font-sans;
+    }
+  }
+}
+
+
+
+

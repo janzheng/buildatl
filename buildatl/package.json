@@ -11,15 +11,17 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "surge": "npm run generate; cd dist; surge . -d buildatl.surge.sh"
+    "surge": "npm run generate; cd dist; surge . -d buildatl.surge.sh",
+    "prod": "npm run generate; cd dist; surge . -d buildatl.com"
   },
   "dependencies": {
     "@nuxtjs/font-awesome": "^1.0.3",
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/markdownit": "^1.2.1",
     "coeur": "^0.1.58",
-    "cytosis": "0.0.115",
-    "nuxt": "^1.0.0"
+    "cytosis": "0.0.202",
+    "nuxt": "^1.0.0",
+    "slug": "^0.9.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

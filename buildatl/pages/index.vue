@@ -1,31 +1,45 @@
 <template>
-  <div class="Main">
+
+  <article class="Home Projects container">
     <Header/>
-    <section class="container">
 
-      <div>
-        <h1 class="title">
-          buildatl
-        </h1>
-        <h2 class="subtitle">
-          Nuxt.js project
-        </h2>
+    <section class="container body">
 
-        {{ Projects }}
+    <h1 class="Orgs-title title">
+      Projects
+    </h1>
 
-      </div>
+    buildatl is a project in its very infancy. Currently we only work with [LifeLine Animal Project](https://lifelineanimal.org), but we welcome more organizations.
+
+    Send an email to <a href="mailto:hello@buildatl.com">hello@buildatl.com</a>
+
+    <div class="list-container">
+      <ul>
+        <li v-for="org in orgs" v-if="org.fields.isPublished" :key="org.id">
+          <div>
+            {{org.fields.Name}}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <Message/>
+
     </section>
     <Footer/>
-  </div>
+  </article>
 </template>
+
+
+
 
 <script>
 
-import Cytosis from 'cytosis'
-
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
+import Message from '~/components/Message.vue'
 
+import {fetchCytosis} from '~/assets/helpers.js'
 
 
 export default {
@@ -33,45 +47,21 @@ export default {
   components: {
     Header,
     Footer,
+    Message
   },
 
-  // data () {
-  //   console.log("Welcome to BuildATL", this.$route, this.$route.params)
-  //   return { params: this.$route.params }
-  // },
+  data: function () {
+    return {
+      projects: this.$store.state.Projects,
+      content: this.$store.state.Content,
+      orgs: this.$store.state.Organizations,
+      tags: this.$store.state.Tags,
+      blog: this.$store.state.Blog,
+    }
+  },
 
-  async asyncData({ params }) {
-    // console.log('pages/index! asyncData')
-
-    let cytosis = new Cytosis({
-      airtableApiKey: 'keyAe6M1KoPfg25aO',
-      airtableBase: {id: 'app8apL6FHHvS8dl4'}
-    })
-
-    let airtables = {}, result
-    console.log('starting cytosis:', cytosis)
-    await cytosis.initConfig()
-    console.log('cytosis:', cytosis)
-    let tables = await cytosis.getTables()
-
-    let obj = { cytosis, ...tables }
-    return obj
-
-
-    // // result = await cytosis.find("British Shorthair", tables)
-    // // console.log('Result 1:', result)
-
-    // // result = await cytosis.find("Dog", tables)
-    // // console.log('Result 2:', result)
-
-    // // result = await cytosis.find("Norwegian Forest Cat.Dog", tables)
-    // // console.log('Result 3:', result)
-
-    // // result = await cytosis.find("Tags.Dog", tables)
-    // // console.log('Result 4:', result)
-
-    // result = await cytosis.find("Animals.CatDog.Tags", tables)
-    // console.log('Result 5:', result)
+  async fetch({ store, params }) {
+    return fetchCytosis(store, params)
   },
 
   data: function () {
