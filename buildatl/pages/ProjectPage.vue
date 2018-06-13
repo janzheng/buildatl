@@ -18,39 +18,69 @@
 
         <div class="_grid-2-1 _width-content-max _padding-left-none">
 
-          <div class="_dash" >
+          <div class="DetailsPage-main" :class="{'_dash': project.fields.Type!='Design Exercise'}">
+            <div class="" :class="{'_dash': project.fields.Type=='Design Exercise'}">
+              <div class="DetailsPage-type" v-if="project && project.fields.Type">
+                {{project.fields.Type}}
+              </div>
 
-            <div class="DetailsPage-tags">
-              <span class="_tag" v-for="skill of getSkills(project.fields.Skills)" :key='skill'>{{skill}}</span>
+              <h3 class="DetailsPage-title title">
+                <!-- {{ getOrg() }} -->
+                {{project.fields.Name}}
+              </h3>
+
+              <div class="DetailsPage-tags">
+                <span class="_tag" v-for="skill of getSkills(project.fields.Skills)" :key='skill'>{{skill}}</span>
+              </div>
+
+              <div class="DetailsPage-link _padding-bottom">
+                <a target="_blank" :href="project.fields.URL">{{project.fields.URL}}</a>
+              </div>
+
+              <div class="DetailsPage-description" v-if="project" v-html="$md.render(project.fields.Description || '')">
+              </div>
+
+              <div class="DetailsPage-requirements _margin-top-2" v-if="project.fields.Requirements" >
+                <h6 class="_padding-bottom-none">Requirements</h6>
+                <div v-html="$md.render(project.fields.Requirements || '')"></div>
+              </div>
+
+              <div class="DetailsPage-updates _margin-top-2" v-if="project.fields.Updates" >
+                <h6 class="_padding-bottom-none">Updates</h6>
+                <div v-html="$md.render(project.fields.Updates || '')"></div>
+              </div>
+
             </div>
 
-            <div class="DetailsPage-image-container _padding-top _margin-top" v-if="project.fields.Image">
-              <img :src="project.fields.Image[0].thumbnails.large.url" class="DetailsPage-image" 
-              />
-            </div>
-            <h3 class="DetailsPage-title title">
-              <!-- {{ getOrg() }} -->
-              {{project.fields.Name}}
-            </h3>
+            <div class="_dash" v-if="project.fields.Type=='Design Exercise'">
+              
+              <h4 class="_padding-top-none">Design Exercises</h4>
+              <div class="DetailsPage-exercise-about _grid-2-xs _align-vertically">
+                <div class="">
+                  <span v-html="getContent('Project-Exercise-Intro')"></span>
+                </div>
 
-            <div class="DetailsPage-link _padding-bottom">
-              <a target="_blank" :href="project.fields.URL">{{project.fields.URL}}</a>
-            </div>
+                <div class="_button _center --yellow _margin-none"
+                     v-on:click="isApply = !isApply"
+                >
+                  <span>Add your Work</span>
+                </div>
+              </div>
+              <div class="DetailsPage-addWork _margin-top" v-if="isApply!=false">
+                <span class="DetailsPage-sans_serif" v-html="$md.render(project.fields.Application || '')"></span>
+              </div>
 
-            <div class="DetailsPage-description" v-if="project" v-html="$md.render(project.fields.Description || '')">
             </div>
-
-            <div class="DetailsPage-requirements _margin-top-2" v-if="project.fields.Requirements" >
-              <h6 class="_padding-bottom-none">Requirements</h6>
-              <div v-html="$md.render(project.fields.Requirements || '')"></div>
-            </div>
-
-            <div class="DetailsPage-updates _margin-top-2" v-if="project.fields.Updates" >
-              <h6 class="_padding-bottom-none">Updates</h6>
-              <div v-html="$md.render(project.fields.Updates || '')"></div>
-            </div>
-
           </div>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,14 +90,19 @@
 
               <div class="_margin-bottom">
 
-                <h6 class="DetailsPage-sidebar-header">Details</h6>
+                <div class="DetailsPage-image-container _margin-bottom _margin-top" v-if="project.fields.Image">
+                  <img :src="project.fields.Image[0].thumbnails.large.url" class="DetailsPage-image" 
+                  />
+                </div>
+
+                <!-- <h6 class="DetailsPage-sidebar-header">Details</h6> -->
 
                 <div class="DetailsPage-details" v-html="$md.render(project.fields.Details || '')">
                 </div>
 
-                <div class="DetailsPage-type" v-if="project.fields.Type">
+                <!-- <div class="DetailsPage-type" v-if="project.fields.Type">
                   <div class="DetailsPage-lineheader">Project Type:</div> <span v-html="$md.render(project.fields.Type || '')"></span>
-                </div>
+                </div> -->
 
 
                 <div class="DetailsPage-organization _margin-bottom" v-if="project.fields.Organization">
@@ -98,14 +133,18 @@
                   <span>Apply for Project</span>
                 </router-link>
  -->
-                <div class="_button _center --width-full --yellow _margin-none"
-                     v-on:click="isApply = !isApply"
-                >
-                  <span v-if="project.fields.Type=='Project'">Apply for Project</span>
-                  <span v-if="project.fields.Type=='Design Exercise'">Add your Work</span>
-                </div>
-                <div class="DetailsPage-application _margin-top" v-if="isApply!=false">
-                  <span v-html="$md.render(project.fields.Application || '')"></span>
+
+
+                <div class="DetailsPage-application _margin-top" v-if="project.fields.Type=='Project'">
+                  <div class="_button _center --width-full --yellow _margin-none"
+                       v-on:click="isApply = !isApply" 
+                  >
+                    <span v-if="project.fields.Type=='Project'">Apply for Project</span>
+                    <!-- <span v-if="project.fields.Type=='Design Exercise'">Add your Work</span> -->
+                  </div>
+                  <div class=" _margin-top" v-if="isApply!=false">
+                    <span v-html="$md.render(project.fields.Application || '')"></span>
+                  </div>
                 </div>
 
 
@@ -203,7 +242,14 @@ export default {
         // console.log('skills:' , skills, this.skills, _skills)
         return _skills
       }
-    }
+    },
+    getContent: function(findStr) {
+      let obj = ''
+      if(this.content) {
+        obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
+      }
+      return obj
+    },
   }
 
 }

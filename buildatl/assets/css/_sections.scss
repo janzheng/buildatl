@@ -33,6 +33,15 @@
 
 
 
+%md-sans_serif {
+  // fixing markdown
+  &, *, p {
+    @extend %font-sans;
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
 
 .DetailsPage {
   .DetailsPage-image-container {
@@ -51,11 +60,8 @@
     }
   }
   .DetailsPage-sidebar {
-    &, *, p {
-      @extend %font-sans;
-      font-size: 15px;
-      line-height: 22px;
-    }
+    @extend %md-sans_serif;
+
     a {
       text-decoration: none !important;
       border: 0;
@@ -81,6 +87,14 @@
       display: inline;
       margin: 0;
     }
+  }
+  .DetailsPage-sans_serif {
+    @extend %md-sans_serif;
+  }
+  .DetailsPage-addWork {
+    background-color: $color-ui;
+    border-radius: $radius;
+    padding: $size-base;
   }
 }
 
