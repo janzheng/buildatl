@@ -34,32 +34,61 @@
 
 
 
-.OrgPage {
-  .OrgPage-image-container {
-    margin-bottom: $size-base;
+.DetailsPage {
+  .DetailsPage-image-container {
   }
-  .OrgPage-title {
+  .DetailsPage-image {
+    max-height: 50px;
+    width: auto;
+  }
+  .DetailsPage-title {
     // padding-bottom: 0;
   }
-  .OrgPage-tags {
+  .DetailsPage-tags {
     // margin-bottom: $size-2;
     ._tag {
       background-color: $color-white;
     }
   }
-  .OrgPage-sidebar {
+  .DetailsPage-sidebar {
     &, *, p {
       @extend %font-sans;
+      font-size: 15px;
+      line-height: 22px;
     }
     a {
       text-decoration: none !important;
       border: 0;
     }
+    .DetailsPage-sidebar-header {
+      font-size: 12px;
+    }
   }
-  .OrgPage-link {
+  .DetailsPage-link {
     font-size: $font-large;
   }
+  .DetailsPage-lineheader {
+    font-weight: bold;
+  }
+  .DetailsPage-small {
+    font-size: $font-small;
+    line-height: $font-small + 6px;
+    font-style: italic;
+    // @extend %font-serif;
+  }
+  .DetailsPage-no_paragraphs {
+    p {
+      display: inline;
+      margin: 0;
+    }
+  }
 }
+
+
+
+
+
+
 
 
 

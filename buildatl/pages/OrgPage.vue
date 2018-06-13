@@ -1,6 +1,6 @@
 <template>
 
-  <article class="OrgPage container">
+  <article class="OrgPage DetailsPage container">
 
     <div class="loading" v-if="!org">
       <div class="_loader --circular"></div>
@@ -19,34 +19,34 @@
 
           <div class="_dash" >
 
-            <div class="OrgPage-tags">
+            <div class="DetailsPage-tags">
               <span class="_tag" v-for="tag of getTags(org.fields.Tags)" :key='tag'>{{tag}}</span>
             </div>
 
-            <h2 class="OrgPage-title title">
+            <div class="DetailsPage-image-container _padding-top _margin-top" v-if="org.fields.Image">
+              <img :src="org.fields.Image[0].thumbnails.large.url" class="DetailsPage-image" />
+            </div>
+
+            <h2 class="DetailsPage-title title _padding-top-none">
               <!-- {{ getOrg() }} -->
               {{org.fields.Name}}
             </h2>
 
             <div class=" _padding-bottom">
-              <a class="OrgPage-link" target="_blank" :href="org.fields.URL">{{org.fields.URL}}</a>
+              <a class="DetailsPage-link" target="_blank" :href="org.fields.URL">{{org.fields.URL}}</a>
             </div>
 
-            <div class="OrgPage-image-container" v-if="org.fields.Image">
-              <img :src="org.fields.Image[0].thumbnails.large.url" class="OrgPage-image" />
-            </div>
-
-            <div class="OrgPage-description" v-if="org" v-html="$md.render(org.fields.Description)">
+            <div class="DetailsPage-description" v-if="org" v-html="$md.render(org.fields.Description)">
             </div>
           </div>
 
-          <div class="OrgPage-sidebar _font-sans" >
-            <div class="OrgPage-contact _dash --half" v-if="org.fields.Contact">
-              <h6 class="OrgPage-sidebar-header">Contact</h6>
+          <div class="DetailsPage-sidebar _font-sans" >
+            <div class="DetailsPage-contact _dash --half --transparent" v-if="org.fields.Contact">
+              <h6 class="DetailsPage-sidebar-header">Contact</h6>
               <div v-html="$md.render(org.fields.Contact)"></div>
             </div>
-            <div class="OrgPage-contact _dash --half" v-if="org.fields.Projects">
-              <h6 class="OrgPage-sidebar-header">Projects</h6>
+            <div class="DetailsPage-contact _dash --half --transparent" v-if="org.fields.Projects">
+              <h6 class="DetailsPage-sidebar-header">Projects</h6>
               <div v-for="project in getProjects()" :key="project.id" v-if="project.fields.isPublished">
                 <p><router-link :to="{ path: `/orgs/${project.fields.slug}`}">{{project.fields.Name}}</router-link></p>
               </div>
@@ -89,6 +89,17 @@ export default {
   //   return { params: this.$route.params }
   // },
 
+  head: function () {
+    if(this.org) {
+      console.log('head', this.org.fields.Name)
+      return {
+        title: this.org.fields.Name,
+      }
+    }
+    else {
+      return {}
+    }
+  },
 
   data: function () {
     return {

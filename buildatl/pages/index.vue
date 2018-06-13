@@ -40,9 +40,9 @@
               </div>
 
               <div class="_grid-2-xs _align-vertically _margin-top-half _margin-bottom-half">
-                <div class="_button _center --short _card-cta _margin-none ">Details</div>
+                <div class="_button _center --short --yellow _margin-none ">Details</div>
                 <div class="_font-serif _font-italic" v-if="proj.fields.Bounty">
-                  {{proj.fields.Bounty.join(', ')}}
+                  {{proj.fields.Bounty}}
                 </div>
               </div>
 
@@ -115,13 +115,6 @@ export default {
         obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
       }
       return obj
-    },
-    getTags: function(tags) {
-      if(this.tags && tags) {
-        const _tags = getCytosis().getLinkedRecords(tags, this.tags)
-        console.log('tags:' , tags, this.tags, _tags)
-        return _tags
-      }
     },
     getSkills: function(skills) {
       if(this.skills && skills) {

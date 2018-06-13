@@ -8,7 +8,7 @@
 
       <div class="_right">
         <span class="_margin-right-2">
-          <router-link to='/' class="--border-none">Projects</router-link>
+          <router-link to='/' class="--border-none" :class="{'nuxt-link-exact-active':Projects==true}">Projects</router-link>
         </span>
         <span class="_margin-right-2">
           <router-link to='/orgs' class="Header-orgs --border-none">Orgs</router-link>
@@ -23,6 +23,13 @@
     </div>
   </section>
 </template>
+
+
+<script>
+  export default {
+    props: ['Projects']
+  }
+</script>
 
 <style lang="scss" scoped>
 

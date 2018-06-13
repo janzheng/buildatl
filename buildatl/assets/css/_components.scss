@@ -17,6 +17,7 @@
 
 
 ._dash {
+  border-radius: $radius;
   padding: $size-2;
   background-color: $color-ui-light;
   margin-top: $size-2;
@@ -24,7 +25,7 @@
   // @extend %width-content-paragraph-narrow;
 
   &.--transparent {
-    background: transparent;
+    background: $color-ui-lighter;
   }
   &.--half {
     padding: $size-base;
@@ -38,7 +39,11 @@
 // extends coeur cards
 ._card {
   // box-shadow: none; // drop the shadow
-  padding: $size-2;
+  padding: $size-2 $size-base;
+
+  &:hover {
+    background-color: $color-ui-lighter;
+  }
 
   a {
     border: none !important;
@@ -70,15 +75,6 @@
     height: 70px;
     overflow: ellipsis; 
   }
-  ._card-cta {
-    background-color: $color-main;
-    color: $color-secondary;
-    font-weight: bold;
-    &:hover {
-      background-color: darken($color-main, 0.3);
-      color: $color-secondary;
-    }
-  }
   ._card-tags {
     margin-bottom: $size-half;
   }
@@ -101,6 +97,16 @@
   padding-bottom: $size-half;
 }
 
+
+._button.--yellow {
+  background-color: $color-main;
+  color: $color-secondary;
+  font-weight: bold;
+  &:hover {
+    background-color: darken($color-main, 0.3);
+    color: $color-secondary;
+  }
+}
 
 
 .buildatl {

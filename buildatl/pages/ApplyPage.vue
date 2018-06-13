@@ -1,11 +1,10 @@
 <template>
 
-  <article class="ProjectPage DetailsPage container">
+  <article class="ApplyPage container">
 
     <div class="loading" v-if="!project">
       <div class="_loader --circular"></div>
     </div>
-
 
     <div v-if="project">
       <Header :projects="true" />
@@ -13,7 +12,7 @@
       <section class="copy">
 
         <div class="menu">
-          <router-link to="/">Projects</router-link> / {{project.fields.Name}}
+          <router-link to="/">Projects</router-link> / <router-link :to="`/projects/${project.fields.slug}`">{{project.fields.Name}}</router-link> / Apply
         </div>
 
         <div class="_grid-2-1 _width-content-max _padding-left-none">
@@ -91,24 +90,11 @@
                 <div class="DetailsPage-location" v-if="project.fields.Contact">
                   <div class="DetailsPage-lineheader">Contact:</div> <span v-html="$md.render(project.fields.Contact || '')"></span>
                 </div>
-<!-- 
-                <router-link class="_button _center --width-full --yellow _margin-none"
-                              :to="`/projects/${project.fields.slug}/apply`"
-                              v-if="project.fields.Type=='Project'">
-                  <span>Apply for Project</span>
-                </router-link>
- -->
+
                 <div class="_button _center --width-full --yellow _margin-none"
-                     v-on:click="isApply = !isApply"
-                >
-                  <span v-if="project.fields.Type=='Project'">Apply for Project</span>
-                  <span v-if="project.fields.Type=='Design Exercise'">Add your Work</span>
+                     v-if="project.fields.Type=='Project'">
+                  <span>Apply for Project</span>
                 </div>
-                <div class="DetailsPage-application _margin-top" v-if="isApply!=false">
-                  <span v-html="$md.render(project.fields.Application || '')"></span>
-                </div>
-
-
               </div>
 
             </div>
@@ -122,13 +108,9 @@
 
         </div>
 
-      </section>
-
-
-      <section class="copy">
         <Message/>
-      </section>
 
+      </section>
       <Footer/>
     </div>
 
@@ -156,7 +138,6 @@ export default {
 
   data: function () {
     return {
-      isApply: false,
       content: this.$store.state.Content,
       orgs: this.$store.state.Organizations,
       projects: this.$store.state.Projects,

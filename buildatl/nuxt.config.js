@@ -258,10 +258,15 @@ module.exports = {
           component: resolve(__dirname, 'pages/OrgPage.vue')
         },
         {
-          name: 'org',
+          name: 'project',
           path: '/projects/:id',
           component: resolve(__dirname, 'pages/ProjectPage.vue')
         },
+        // {
+        //   name: 'apply',
+        //   path: '/projects/:id/apply',
+        //   component: resolve(__dirname, 'pages/ApplyPage.vue')
+        // },
       )
     }
   },
