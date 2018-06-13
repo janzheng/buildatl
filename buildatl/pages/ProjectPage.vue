@@ -1,79 +1,149 @@
 <template>
-  <section class="container">
-    <div>
-      <h1 class="title">
-        HEEEELLLOOOOO ??? {{ params.name }}
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
 
+  <article class="ProjectPage container">
+
+    <div class="loading" v-if="!project">
+      <div class="_loader --circular"></div>
     </div>
-  </section>
+
+    <div v-if="project">
+      <Header/>
+
+      <section class="copy">
+
+        <div class="menu">
+          <router-link to="/">Projects</router-link> / {{project.fields.Name}}
+        </div>
+
+        <div class="_grid-2-1 _width-content-max _padding-left-none">
+
+          <div class="_dash" >
+            <div class="ProjectPage-image-container" v-if="project.fields.Image">
+              <img :src="project.fields.Image[0].thumbnails.large.url" class="ProjectPage-image" />
+            </div>
+            <h3 class="ProjectPage-title title">
+              <!-- {{ getOrg() }} -->
+              {{project.fields.Name}}
+            </h3>
+
+            <div class="ProjectPage-link _padding-bottom">
+              <a target="_blank" :href="project.fields.URL">{{project.fields.URL}}</a>
+            </div>
+
+            <div class="ProjectPage-tags" v-if="project">
+              <span>{{getTags()}}</span>
+            </div>
+
+            <div class="ProjectPage-description" v-if="project" v-html="$md.render(project.fields.Description)">
+            </div>
+          </div>
+
+          <div class="ProjectPage-sidebar _font-sans" >
+            <div class="ProjectPage-contact _dash --half" v-if="project.fields.Contact">
+              <h6 class="ProjectPage-sidebar-header">Contact</h6>
+              <div v-html="$md.render(project.fields.Contact)"></div>
+            </div>
+            <div class="ProjectPage-contact _dash --half" v-if="project.fields.Projects">
+              <h6 class="ProjectPage-sidebar-header">Projects</h6>
+              <div v-for="project in getProjects()" :key="project.id" v-if="project.fields.isPublished">
+                <p><router-link :to="{ path: `/orgs/${project.fields.slug}`}">{{project.fields.Name}}</router-link></p>
+              </div>
+            </div>
+            
+          </div>
+
+        </div>
+
+        <Message/>
+
+      </section>
+      <Footer/>
+    </div>
+
+  </article>
+
 </template>
 
 <script>
 
-import Cytosis from 'cytosis'
+import Header from '~/components/Header.vue'
+import Footer from '~/components/Footer.vue'
+import Message from '~/components/Message.vue'
+
+import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
+
+
 
 export default {
 
   components: {
-    
-  },
-  data () {
-    console.log(this.$route, this.$route.params)
-    return { params: this.$route.params }
+    Header,
+    Footer,
+    Message
   },
 
-  // async asyncData({ params }) {
-  //   console.log('pages/hello asyncData')
-
-  //   // let { data } = await axios.get(`https://my-api/posts/${params.id}`)
-  //   // return { title: data.title }
-  //   // console.log('???', Cytosis)
-  //   let cytosis = new Cytosis({
-  //     airtableApiKey: 'keyAe6M1KoPfg25aO',
-  //     airtableBase: {id: 'appDUqchYZnImgQoU'}
-  //   })
-  //   let airtables = {}, result
-  //   console.log('starting cytosis:', cytosis)
-  //   await cytosis.initConfig()
-  //   console.log('cytosis:', cytosis)
-  //   // let tables = await cytosis.getTables()
+  // data () {
+  //   console.log("Welcome to BuildATL", this.$route, this.$route.params)
+  //   return { params: this.$route.params }
+  // },
 
 
-  //   // // result = await cytosis.find("British Shorthair", tables)
-  //   // // console.log('Result 1:', result)
+  data: function () {
+    return {
+      content: this.$store.state.Content,
+      orgs: this.$store.state.Organizations,
+      projects: this.$store.state.Projects,
+      tags: this.$store.state.Tags,
+      params: this.$route.params,
+      project: undefined, //  {fields: ''}, // undefined initially 
+    }
+  },
 
-  //   // // result = await cytosis.find("Dog", tables)
-  //   // // console.log('Result 2:', result)
+  async fetch({ store, params }) {
+    return fetchCytosis(store, params)
+  },
 
-  //   // // result = await cytosis.find("Norwegian Forest Cat.Dog", tables)
-  //   // // console.log('Result 3:', result)
+  mounted: function () {
+    const projName = unescape(this.$route.params.id)
+    // console.log('projName:', projName, ' projects:' , this.projects, ' params: ', this.$route.params)
+    this.project = getCytosis().find(projName, [this.projects], ['Name', 'slug'])[0]
+  },
 
-  //   // // result = await cytosis.find("Tags.Dog", tables)
-  //   // // console.log('Result 4:', result)
-
-  //   // result = await cytosis.find("Animals.CatDog.Tags", tables)
-  //   // console.log('Result 5:', result)
-  // }
+  methods: {
+    getOrg: function() {
+      return unescape(this.$route.params.id)
+    },
+    getProjects: function() {
+      if(this.org && this.org.fields.Projects) {
+        const projects = getCytosis().getLinkedRecords(this.org.fields.Projects, this.projects, true)
+        // const projects = getCytosis().getLinkedRecords(this.org.fields.Projects, this.projects)
+        // getLinkedRecords: function(recordIds, linkedTable
+        // console.log('projects:' , projects)
+        return projects
+      }
+    },
+    getTags: function() {
+      if(this.org && this.org.fields.Tags) {
+        const tags = getCytosis().getLinkedRecords(this.org.fields.Tags, this.tags)
+        // const projects = getCytosis().getLinkedRecords(this.org.fields.Projects, this.projects)
+        // getLinkedRecords: function(recordIds, linkedTable
+        // console.log('projects:' , projects)
+        return tags
+      }
+    }
+  }
 
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.logo-sm {
+  width: 80px;
+  height: 100%;
+  vertical-align: middle;
+  padding-bottom: 6px;
+}
+
 </style>
-
-
 

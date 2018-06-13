@@ -9,7 +9,7 @@
     <div v-if="org">
       <Header/>
 
-      <section class="container body">
+      <section class="copy">
 
         <div class="menu">
           <router-link to="/orgs">Organizations</router-link> / {{org.fields.Name}}
@@ -18,15 +18,25 @@
         <div class="_grid-2-1 _width-content-max _padding-left-none">
 
           <div class="_dash" >
-            <div class="OrgPage-image-container">
-              <img :src="org.fields.Image[0].thumbnails.large.url" class="OrgPage-image" />
+
+            <div class="OrgPage-tags">
+              <span class="_tag" v-for="tag of getTags(org.fields.Tags)" :key='tag'>{{tag}}</span>
             </div>
-            <h3 class="OrgPage-title title">
+
+            <h2 class="OrgPage-title title">
               <!-- {{ getOrg() }} -->
               {{org.fields.Name}}
-            </h3>
+            </h2>
 
-            <div v-if="org" v-html="$md.render(org.fields.Description)">
+            <div class=" _padding-bottom">
+              <a class="OrgPage-link" target="_blank" :href="org.fields.URL">{{org.fields.URL}}</a>
+            </div>
+
+            <div class="OrgPage-image-container" v-if="org.fields.Image">
+              <img :src="org.fields.Image[0].thumbnails.large.url" class="OrgPage-image" />
+            </div>
+
+            <div class="OrgPage-description" v-if="org" v-html="$md.render(org.fields.Description)">
             </div>
           </div>
 
@@ -85,6 +95,7 @@ export default {
       content: this.$store.state.Content,
       orgs: this.$store.state.Organizations,
       projects: this.$store.state.Projects,
+      tags: this.$store.state.Tags,
       params: this.$route.params,
       org: undefined, //  {fields: ''}, // undefined initially 
     }
@@ -111,6 +122,15 @@ export default {
         // getLinkedRecords: function(recordIds, linkedTable
         // console.log('projects:' , projects)
         return projects
+      }
+    },
+    getTags: function() {
+      if(this.org && this.org.fields.Tags) {
+        const tags = getCytosis().getLinkedRecords(this.org.fields.Tags, this.tags)
+        // const projects = getCytosis().getLinkedRecords(this.org.fields.Projects, this.projects)
+        // getLinkedRecords: function(recordIds, linkedTable
+        // console.log('projects:' , projects)
+        return tags
       }
     }
   }

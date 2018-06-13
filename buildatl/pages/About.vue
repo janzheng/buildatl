@@ -3,15 +3,19 @@
   <article class="About container">
     <Header/>
 
-    <section class="container body">
+    <section class="narrow copy">
 
     <h1 class="Orgs-title title">
       Mission
     </h1>
 
-    <div class="About-title _padding-bottom">
-      <span class="buildatl"><span class="build">build</span><img class="logo-sm" src="~/static/atl.png"/></span>
-      <span>is about keeping Atlanta <span class="awesome">awesome.</span></span>
+    <div class="About-title subtitle _padding-bottom">
+      <div class="buildatl">
+        <!-- <span class="build">build</span> -->
+        about keeping
+        <img class="logo-sm _margin-right-half" src="~/static/atl.png"/>
+        <span class="awesome">awesome.</span>
+      </div>
     </div>
 
 
@@ -80,9 +84,10 @@ export default {
 
   methods: {
     getContent: function(findStr) {
-      const _this = this
-      const obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
-      // console.log('obj', obj)
+      let obj = ''
+      if(this.content) {
+        obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
+      }
       return obj
     },
   }
@@ -91,13 +96,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.logo-sm {
-  width: 80px;
-  // height: 100%;
-  vertical-align: middle;
-  padding-bottom: 6px;
-}
 
 </style>
 

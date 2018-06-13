@@ -16,7 +16,7 @@ export const fetchCytosis = async function(store=undefined) {
   if(store && !store.state.cytosis) {
     let result
     await cytosis.initConfig()
-    let tables = await cytosis.getTables()
+    let tables = await cytosis.getTables({view: "Grid view"})
     // console.log('tables:', tables)
     // result = await cytosis.find("Test Content", tables)
     // console.log('Result 1:', result)

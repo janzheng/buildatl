@@ -3,47 +3,48 @@
   <article class="Orgs container">
     <Header/>
 
-    <section class="container body">
+    <section class="narrow copy">
 
-    <h1 class="Orgs-title title">
-      Organizations
-    </h1>
+      <h1 class="Orgs-title title">
+        Organizations
+      </h1>
 
-    <div v-html="$md.render(getContent('Orgs-Intro'))"></div>
-
-    <div class="_card-container _grid-3">
-      <div class="_card" v-for="org in orgs" v-if="org.fields.isPublished" :key="org.id">
-
-        <router-link :to="{ path: `orgs/${org.fields.slug}`}">
-
-          <div class="_card-upper">
-            <div class="_card-image-container" v-if="org.fields.Image.length>0">
-              <img class="_card-image" :src="org.fields.Image[0].thumbnails.large.url" 
-                   :width="org.fields.Image[0].thumbnails.large.width" 
-                   height="100%"
-              />
-            </div>
-          </div>
-          <div class="_card-lower">
-            <div class="_card-title">{{org.fields.Name}}</div>
-            <div class="_card-description">{{org.fields.ShortDescription}}</div>
-          </div>
-        </router-link>
-
-      </div>
-    </div>
-
-    <Message/>
+      <div v-html="$md.render(getContent('Orgs-Intro'))"></div>
 
     </section>
+
+    <section class="max copy">
+      <div class="_card-container _grid-3 _margin-top _margin-bottom">
+        <div class="_card" v-for="org in orgs" v-if="org.fields.isPublished" :key="org.id">
+
+          <router-link :to="{ path: `orgs/${org.fields.slug}`}">
+
+            <div class="_card-upper">
+              <div class="_card-image-container" v-if="org.fields.Image">
+                <img class="_card-image" :src="org.fields.Image[0].thumbnails.large.url"
+                />
+              </div>
+            </div>
+            <div class="_card-lower">
+              <div class="_card-title">{{org.fields.Name}}</div>
+              <div class="_card-description">{{org.fields.ShortDescription}}</div>
+            </div>
+          </router-link>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="narrow copy">
+      <Message/>
+    </section>
+
     <Footer/>
   </article>
 
 </template>
 
 <script>
-
-import slug from 'slug'
 
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
@@ -89,14 +90,13 @@ export default {
 
   methods: {
     getContent: function(findStr) {
-      const _this = this
-      const obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
-      // console.log('obj', obj)
+      let obj = ''
+      if(this.content) {
+        obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
+        // console.log('obj', obj)
+      }
       return obj
     },
-    getSlug: function(str) {
-      return slug(str, {lower: true})
-    }
   },
 
 }

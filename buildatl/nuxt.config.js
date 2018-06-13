@@ -23,9 +23,8 @@ const site_fb = '172737416727733'; // buildAtl fb id
 module.exports = {
   env: {
     site_fb: site_fb,
-
-    cytosis_api = 'keyAe6M1KoPfg25aO',
-    cytosis_base = 'app8apL6FHHvS8dl4',
+    cytosis_api: 'keyAe6M1KoPfg25aO',
+    cytosis_base: 'app8apL6FHHvS8dl4',
   },
 
   /*

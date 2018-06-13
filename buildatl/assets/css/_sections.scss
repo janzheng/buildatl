@@ -32,34 +32,32 @@
 }
 
 
-.About {
-  .About-title {
-    @extend h3;
-    font-weight: 300;
-    .buildatl {
-      .build {
-        // font-style: italic;
-        @extend %font-display;
-        padding-right: $size-base/4;
-      }
-      .logo-sm {
-        padding-right: $size-half;
-      }
-    }
-    .awesome {
-      font-weight: 700;
-    }
-  }
-
-}
-
 
 
 .OrgPage {
+  .OrgPage-image-container {
+    margin-bottom: $size-base;
+  }
+  .OrgPage-title {
+    // padding-bottom: 0;
+  }
+  .OrgPage-tags {
+    // margin-bottom: $size-2;
+    ._tag {
+      background-color: $color-white;
+    }
+  }
   .OrgPage-sidebar {
     &, *, p {
       @extend %font-sans;
     }
+    a {
+      text-decoration: none !important;
+      border: 0;
+    }
+  }
+  .OrgPage-link {
+    font-size: $font-large;
   }
 }
 

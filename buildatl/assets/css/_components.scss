@@ -28,6 +28,7 @@
   }
   &.--half {
     padding: $size-base;
+    margin-bottom: $size-half;
   }
 }
 
@@ -50,14 +51,70 @@
   }
   ._card-image {
     padding-bottom: $size-half;
+    max-height: 50px;
+    width: auto;
+  }
+  ._card-type,
+  ._card-duration {
+    // font-size: $font-small;
+    @extend %font-serif;
+    font-style: italic;
   }
   ._card-title {
-    // font-size: $font-larger;
+    // font-size: $font-large;
+    // line-height: $line_height-large;
     @extend %font-bold;
-    line-height: $line_height-larger;
+    padding-bottom: $size-half;
   }
+  ._card-description {
+    height: 70px;
+    overflow: ellipsis; 
+  }
+  ._card-cta {
+    background-color: $color-main;
+    color: $color-secondary;
+    font-weight: bold;
+    &:hover {
+      background-color: darken($color-main, 0.3);
+      color: $color-secondary;
+    }
+  }
+  ._card-tags {
+    margin-bottom: $size-half;
+  }
+}
+
+._tag {
+  font-size: $size-m1;
+  padding: 4px $size-half;
+  background-color: $color-ui-light;
+  border-radius: $radius-sm;
+  margin-right: $size-half;
+}
+
+// logo deets
+.logo-sm {
+  // padding-right: $size-half;
+  width: 80px;
+  // height: 100%;
+  vertical-align: middle;
+  padding-bottom: $size-half;
 }
 
 
 
-
+.buildatl {
+  @extend h3;
+  font-weight: 300;
+  @extend %font-display;
+  .build {
+    // font-style: italic;
+    padding-right: $size-base/4;
+  }
+  .awesome {
+    font-weight: 700;
+  }
+  &.--h1 {
+    @extend h1;
+  }
+}

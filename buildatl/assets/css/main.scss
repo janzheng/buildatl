@@ -24,10 +24,11 @@ body {
 
 %links-bg,
 ._links-bg {
+  position: relative;
   &:after {
     content: ' ';
     position: absolute;
-    left: $offset; top: $offset*2;
+    left: $offset; bottom: -2px;
     height: $offset/2;
     background: $color-main;
     padding: $offset;
@@ -44,6 +45,15 @@ body {
 .title {
   padding-bottom: $size-base;
 }
+.subtitle {
+  &, p {
+    font-size: $size-p1;
+    line-height: $size-p2;
+    @extend %font-serif;
+  }
+}
+
+
 h3 {
   font-size: $size-p2;
   line-height: $size-p4;
@@ -60,11 +70,23 @@ a {
   // @extend ._pointer-no_events;
   // @extend %ease-fast;
 }
-section.body {
+
+section.copy {
   a {
     text-decoration: underline;
   }
 }
+
+section.narrow {
+  @extend ._width-content-magic;
+}
+section.max {
+  @extend %width-content-max;
+}
+
+
+
+
 
 p {
   font-size: $font-size-base;
@@ -72,12 +94,10 @@ p {
 
   padding-left: 0;
   @extend %font-serif;
-  @extend ._width-content-magic;
 
   a {
     font-weight: 700;
     &+a {
-      padding-left: 4px;
     }
   }
 }
