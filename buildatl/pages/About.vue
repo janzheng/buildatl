@@ -12,7 +12,7 @@
     <div class="About-title subtitle _padding-bottom">
       <div class="buildatl">
         <!-- <span class="build">build</span> -->
-        about keeping
+        All about keeping
         <img class="logo-sm _margin-right-half" src="~/static/atl.png"/>
         <span class="awesome">awesome.</span>
       </div>

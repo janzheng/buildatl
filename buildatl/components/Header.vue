@@ -1,12 +1,12 @@
 
 <template>
   <section class="Header container">
-    <div class="_grid-2-xs _align-vertically">
+    <div class="_grid-2 _align-vertically">
       <div>
         <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/atl.png"/></router-link>
       </div>
 
-      <div class="_right">
+      <div class="_right-sm _padding-top-xs">
         <span class="_margin-right-2">
           <router-link to='/' class="--border-none" :class="{'nuxt-link-exact-active':Projects==true}">Projects</router-link>
         </span>

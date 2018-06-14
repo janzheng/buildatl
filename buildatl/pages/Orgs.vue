@@ -14,7 +14,7 @@
     </section>
 
     <section class="max copy">
-      <div class="_card-container _grid-3 _margin-top _margin-bottom">
+      <div class="_card-container _grid-2 _margin-top _margin-bottom">
         <div class="_card" v-for="org in orgs" v-if="org.fields.isPublished" :key="org.id">
 
           <router-link :to="{ path: `orgs/${org.fields.slug}`}">

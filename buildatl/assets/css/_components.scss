@@ -5,6 +5,7 @@
   & > div {
     background: $color-main;
     padding: $size-base;
+    padding-bottom: $size-2;
   }
   .Message-title {
   }
@@ -39,7 +40,8 @@
 // extends coeur cards
 ._card {
   // box-shadow: none; // drop the shadow
-  padding: $size-2 $size-base;
+  padding: $size-base;
+  padding-top: $size-2;
 
   &:hover {
     background-color: $color-ui-lighter;
@@ -48,8 +50,16 @@
   a {
     border: none !important;
     text-decoration: none !important;
+  
+    // to fill the entire card
+    display: grid;
+    grid-template-rows: auto auto;
+    height: 100%;
   }
 
+  ._card-lower {
+    @extend ._align-bottom;
+  }
   ._card-container {
     padding-top: $size-base;
     padding-bottom: $size-base;
@@ -66,9 +76,12 @@
     font-style: italic;
   }
   ._card-title {
-    // font-size: $font-large;
-    // line-height: $line_height-large;
-    @extend %font-bold;
+    font-size: $font-large;
+    line-height: $font-large + 5px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    // @extend %font-bold;
+    padding-top: $size-base;
     padding-bottom: $size-half;
   }
   ._card-description {
@@ -111,7 +124,7 @@
 
 .buildatl {
   @extend h3;
-  font-weight: 300;
+  // font-weight: 300;
   @extend %font-display;
   .build {
     // font-style: italic;

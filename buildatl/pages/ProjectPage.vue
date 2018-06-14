@@ -23,11 +23,18 @@
               <div class="DetailsPage-type" v-if="project && project.fields.Type">
                 {{project.fields.Type}}
               </div>
+              <div class="DetailsPage-exercise-desc DetailsPage-no_paragraphs _margin-bottom" v-if="project.fields.Type=='Design Exercise'">
+                <span v-html="$md.render(getContent('Project-Exercise-Desc' || ''))"></span>
+              </div>
 
-              <h3 class="DetailsPage-title title">
+
+
+              
+
+              <h2 class="DetailsPage-title title">
                 <!-- {{ getOrg() }} -->
                 {{project.fields.Name}}
-              </h3>
+              </h2>
 
               <div class="DetailsPage-tags">
                 <span class="_tag" v-for="skill of getSkills(project.fields.Skills)" :key='skill'>{{skill}}</span>
@@ -36,6 +43,7 @@
               <div class="DetailsPage-link _padding-bottom">
                 <a target="_blank" :href="project.fields.URL">{{project.fields.URL}}</a>
               </div>
+
 
               <div class="DetailsPage-description" v-if="project" v-html="$md.render(project.fields.Description || '')">
               </div>
@@ -55,16 +63,18 @@
             <div class="_dash" v-if="project.fields.Type=='Design Exercise'">
               
               <h4 class="_padding-top-none">Design Exercises</h4>
-              <div class="DetailsPage-exercise-about _grid-2-xs _align-vertically">
+              <div class="DetailsPage-exercise-about _grid-3-2-xs _align-vertically">
                 <div class="">
                   <span v-html="getContent('Project-Exercise-Intro')"></span>
                 </div>
 
-                <div class="_button _center --yellow _margin-none"
-                     v-on:click="isApply = !isApply"
-                >
-                  <span>Add your Work</span>
-                </div>
+                <!-- <div class="DetailsPage-apply"> -->
+                  <div class="_button _center --yellow _margin-none"
+                       v-on:click="isApply = !isApply"
+                  >
+                    <span>Add your Work</span>
+                  </div>
+                <!-- </div> -->
               </div>
               <div class="DetailsPage-addWork _margin-top" v-if="isApply!=false">
                 <span class="DetailsPage-sans_serif" v-html="$md.render(project.fields.Application || '')"></span>
@@ -123,6 +133,11 @@
                   <div class="DetailsPage-lineheader">Duration:</div> <span v-html="$md.render(project.fields.Duration || '')"></span>
                 </div>
 
+                <div class="DetailsPage-timeframe" v-if="project.fields.Timeframe">
+                  <div class="DetailsPage-lineheader">Timeframe:</div> <span v-html="$md.render(project.fields.Timeframe || '')"></span>
+                </div>
+
+
                 <div class="DetailsPage-location" v-if="project.fields.Contact">
                   <div class="DetailsPage-lineheader">Contact:</div> <span v-html="$md.render(project.fields.Contact || '')"></span>
                 </div>
@@ -139,7 +154,7 @@
                   <div class="_button _center --width-full --yellow _margin-none"
                        v-on:click="isApply = !isApply" 
                   >
-                    <span v-if="project.fields.Type=='Project'">Apply for Project</span>
+                    <span v-if="project.fields.Type=='Project'">Apply Now</span>
                     <!-- <span v-if="project.fields.Type=='Design Exercise'">Add your Work</span> -->
                   </div>
                   <div class=" _margin-top" v-if="isApply!=false">

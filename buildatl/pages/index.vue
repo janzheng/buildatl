@@ -24,25 +24,30 @@
 
             <div class="_card-upper">
               <div class="_card-image-container" v-if="proj.fields.Image">
-                <img class="_card-image" :src="proj.fields.Image[0].thumbnails.large.url" 
+                <img class="_card-image" :src="proj.fields.Image[0].thumbnails.large.url"
                      :width="proj.fields.Image[0].thumbnails.large.width"
                 />
               </div>
+              <div class="_grid-3-2-xs">
+                <div class="_card-type">{{proj.fields.Type}}</div>
+                <div class="_card-duration _right">{{proj.fields.Duration}}</div>
+              </div>
+              
+              <div class="_card-title">{{proj.fields.Name}}</div>
+              <div class="_card-description">{{proj.fields.ShortDescription}}
+              </div>
             </div>
             <div class="_card-lower">
-              <div class="_card-type">{{proj.fields.Type}}</div>
-              <div class="_card-title">{{proj.fields.Name}}</div>
-              <div class="_card-description _margin-bottom">{{proj.fields.ShortDescription}}</div>
+              <div class="_card-bottom _align-bottom">
+                <div class="_card-tags">
+                  <span class="_tag" v-for="skill of getSkills(proj.fields.Skills)" :key='skill'>{{skill}}</span>
+                </div>
 
-              <div class="_card-duration">{{proj.fields.Duration}}</div>
-              <div class="_card-tags">
-                <span class="_tag" v-for="skill of getSkills(proj.fields.Skills)" :key='skill'>{{skill}}</span>
-              </div>
-
-              <div class="_grid-2-xs _align-vertically _margin-top-half _margin-bottom-half">
-                <div class="_button _center --short --yellow _margin-none ">Details</div>
-                <div class="_font-serif _font-italic" v-if="proj.fields.Bounty">
-                  {{proj.fields.Bounty}}
+                <div class="_grid-2-xs _align-vertically _margin-top-half _margin-bottom-half">
+                  <div class="_button _center --short --yellow _margin-none ">Details</div>
+                  <div class="_font-serif _font-italic" v-if="proj.fields.Bounty">
+                    {{proj.fields.Bounty}}
+                  </div>
                 </div>
               </div>
 

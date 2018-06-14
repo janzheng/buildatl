@@ -33,25 +33,20 @@
 
 
 
-%md-sans_serif {
-  // fixing markdown
-  &, *, p {
-    @extend %font-sans;
-    font-size: 15px;
-    line-height: 22px;
-  }
-}
-
 
 .DetailsPage {
   .DetailsPage-image-container {
+  }
+  .DetailsPage-type {
+    padding-bottom: $size-base;
   }
   .DetailsPage-image {
     max-height: 50px;
     width: auto;
   }
   .DetailsPage-title {
-    // padding-bottom: 0;
+    padding-top: $size-base;
+    // color: $color-black;
   }
   .DetailsPage-tags {
     // margin-bottom: $size-2;
@@ -92,9 +87,18 @@
     @extend %md-sans_serif;
   }
   .DetailsPage-addWork {
-    background-color: $color-ui;
+    border: solid $color-ui $border-thin;
     border-radius: $radius;
     padding: $size-base;
+  }
+  .DetailsPage-application {
+    // position: sticky;
+    // top: $size-base;
+  }
+  .DetailsPage-exercise-desc {
+    background-color: $color-main;
+    padding: $size-base;
+
   }
 }
 

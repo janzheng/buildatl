@@ -21,9 +21,10 @@ const page_name = ''; // placeholder for the copy+paste
 const site_fb = '172737416727733'; // buildAtl fb id
 
 module.exports = {
+  mode: 'spa', // 'universal'  — spa useful for airtable data updates
   env: {
     site_fb: site_fb,
-    cytosis_api: 'keyAe6M1KoPfg25aO',
+    cytosis_reader_api: 'keyAe6M1KoPfg25aO',
     cytosis_base: 'app8apL6FHHvS8dl4',
   },
 
@@ -95,7 +96,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: site_ico }, // <link rel="icon" sizes="192x192" href="/path/to/icon.png">
       { rel: 'apple-touch-icon', href: site_ico }, // default resolution is 192x192 <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
       { rel: 'mask-icon',  href: site_ico, color: site_color}, // <link rel="mask-icon" href="/path/to/icon.svg" color="blue"> <!-- Safari Pinned Tab Icon -->
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Playfair+Display:300, 700' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Playfair+Display:400, 700' }
     ],
   },
 
